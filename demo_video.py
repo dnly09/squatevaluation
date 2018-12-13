@@ -242,8 +242,9 @@ def process(input_image, params, model_params):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--video_path', type=str, required=True, help='input video file name')
+    parser.add_argument('--videos', type=str, required=True, help='videos directory')
     parser.add_argument('--model', type=str, default='model.h5', help='path to the weights file')
+    parser.add_argument('--output', type=str, required=True, help='output path')
     parser.add_argument('--frame_ratio', type=int, default=1, help='analyze every [n] frames')
     parser.add_argument('--process_speed', type=int, default=4,
                         help='Int 1 (fastest, lowest quality) to 4 (slowest, highest quality)')
@@ -266,7 +267,7 @@ if __name__ == '__main__':
         video_file = video_path + videos[i]
 
         # Output location
-        output_path = 'data/pe_aug/'
+        output_path = args.output
         output_format = '.mp4'
         video_output = output_path + videos[i] + str(start_datetime) + output_format
 
