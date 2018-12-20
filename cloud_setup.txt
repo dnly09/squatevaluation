@@ -1,0 +1,57 @@
+*Creating a google cloud computer*
+
+1. Create a google cloud account
+2. Receive $380 CAD credit with 1 year expiry
+3. Navigate to Compute>Compute Engine>VM instances
+
+Option 1 - choose the same specs that I did:
+4a. Click "Create an instance" and navigate to the "Marketplace" tab
+5a. Search for and select "Deep Learning VM"
+6a. Name your computer, install the GPU driver and click "Deploy"
+
+Option 2 - configure your computer however you want
+4b. Create an instance
+5b. Choose a marketplace VM or just use the blank computer OS
+6b.Name your computer and click "Deploy"
+
+7. Once your computer is ready, click "Start" and then click "SSH"
+
+*Getting miniconda*
+
+1. Type "wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+(this is the miniconda installation for 64-bit linux)
+2. Type "ssh (your miniconda file name)"
+3. Agree to all the terms in the installation process
+4. Close the window and reconnect to your instance using the "SSH" button
+
+*Installing packages*
+
+1. Type "conda install jupyter lab jupyter numpy pandas seaborn matplotlib pillow graphviz pydot
+scikit-learn opencv tensorflow keras"
+
+*Adding a firewall exception*
+1. Navigate to Networking>VPC network>Firewall rules
+2. Create a new Firewall rule
+3. Use these settings: Logs (off), Network (default), Priority (1000), Direction of Traffic (Ingress),
+Action on match (allow), Targets (all instances on the network), Target tags (blank), Source filter
+(IP ranges), Source IP range (set to 0.0.0.0/0), Second source filter (none) Protocols and ports (Allow
+all)
+
+*Getting into a juptyer notebook/lab*
+1. Reconnect to your computer using the "SSH" button
+2. Instantiate jupyter configuration by typing: jupyter notebook --generate-config
+3. Command to create password (so that you don’t have to use a token): jupyter notebook password
+4. Command to see hashed password: cat /jet/etc/jupyter_notebook/jupyter_notebook_config.json
+(record or copy this password somewhere)
+5. Command to edit config: nano /jet/etc/jupyter_notebook/jupyter_notebook_config.py
+6. At the very top, type in the following once you have the config file opened:
+c.NotebookApp.ip = 'internal IP address here'
+c.NotebookApp.password = u'full password from step 4'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 8888
+7. Type in jupyter lab/notebook to start your instance
+8. Copy your VM's external IP address into your browser and add ':8888'
+9. Submit the password you used to create this instance
+10. Now you are connected to your jupyter lab/notebook instance on the cloud
+
+
