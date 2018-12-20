@@ -55,7 +55,7 @@ The fields of physical rehabilitation, physiotherapy and athletic coaching can i
 
 ### 2.3 Configuring a computer on google cloud (optional)
 
-To be added
+See cloud_setup.txt
 
 ## 3. Using the models
 
